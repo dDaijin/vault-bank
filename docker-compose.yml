@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # ─── Бекенд ─────────────────────────────────────────────
   backend:
     build:
       context: ./backend
@@ -9,11 +8,10 @@ services:
     container_name: vault_backend
     restart: unless-stopped
     environment:
-      DATABASE_URL: ${DATABASE_URL}   # Railway видає цей URL
-    env_file:
-      - .env
+      DATABASE_URL: ${DATABASE_URL}
     ports:
       - "8001:8000"
+
 
   # ─── Фронтенд ────────────────────────────────────────────
   frontend:
