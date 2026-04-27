@@ -18,7 +18,7 @@ services:
   # ─── Фронтенд ────────────────────────────────────────────
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile.frontend
     container_name: vault_frontend
     restart: unless-stopped
