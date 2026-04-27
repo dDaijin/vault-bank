@@ -1,0 +1,27 @@
+# ─── Загальний .dockerignore (корінь проєкту) ───────────────
+
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/.env
+
+# Node
+src/node_modules/
+src/build/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
