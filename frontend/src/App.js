@@ -621,16 +621,10 @@ function DashboardPage({ onNavigate, onLogout, token, theme, setTheme }) {
   useEffect(() => {
     const fetchRates = async () => {
       try {
-        const today = new Date();
-        const dateStr = today.toISOString().slice(0, 10).replace(/-/g, "");
-        const [usdRes, eurRes] = await Promise.all([
-          fetch(`https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=USD&date=${dateStr}&json`),
-          fetch(`https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=EUR&date=${dateStr}&json`),
-        ]);
-        const [usdData, eurData] = await Promise.all([usdRes.json(), eurRes.json()]);
+        const data = await api.get("/currency/rates", token);
         setRates({
-          usd: usdData[0]?.rate ?? null,
-          eur: eurData[0]?.rate ?? null,
+          usd: data.usd ?? null,
+          eur: data.eur ?? null,
         });
       } catch (e) {
         console.log("Помилка завантаження курсів НБУ", e);

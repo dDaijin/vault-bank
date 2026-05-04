@@ -4,6 +4,7 @@ from routers import auth, accounts, transactions
 from loans import router as loans_router
 from database import Base, engine
 from support import router as support_router
+from currency import router as currency_router
 
 import models
 
@@ -27,6 +28,7 @@ app.add_middleware(
 
 app.include_router(loans_router, prefix="/api/loans", tags=["loans"])
 app.include_router(support_router, prefix="/api/support", tags=["support"])
+app.include_router(currency_router, prefix="/api/currency", tags=["currency"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(accounts.router, prefix="/api/accounts", tags=["accounts"])
 app.include_router(transactions.router, prefix="/api/transactions", tags=["transactions"])
