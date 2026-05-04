@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-/* ─── API ─── */
 const API = process.env.REACT_APP_API_URL || "https://vault-bank-production.up.railway.app/api";
 
 const api = {
@@ -72,6 +71,12 @@ const THEMES = {
 
 // Глобальна змінна теми — оновлюється через ThemeContext
 let C = THEMES.dark;
+
+// Оновлює глобальний C — викликається на початку кожного компонента
+const useTheme = (theme) => {
+  if (theme) C = THEMES[theme] || THEMES.dark;
+  return C;
+};
 
 const FONT = "Oxanium";
 
@@ -357,7 +362,8 @@ const BgGrid = () => (
 /* ═══════════════════════════════════════
    PAGE 1 — WARNING
 ═══════════════════════════════════════ */
-function WarningPage({ onContinue }) {
+function WarningPage({ onContinue, theme }) {
+  useTheme(theme);
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
       <BgGrid />
@@ -394,7 +400,8 @@ function WarningPage({ onContinue }) {
 /* ═══════════════════════════════════════
    PAGE 2 — AUTH
 ═══════════════════════════════════════ */
-function AuthPage({ onLogin }) {
+function AuthPage({ onLogin, theme }) {
+  useTheme(theme);
   const [tab, setTab] = useState("login");
 
   // Login
@@ -607,6 +614,7 @@ function formatTxDate(iso) {
 }
 
 function DashboardPage({ onNavigate, onLogout, token, theme, setTheme }) {
+  useTheme(theme);
   const [user, setUser] = useState(null);
   const [account, setAccount] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -969,7 +977,8 @@ function DashboardPage({ onNavigate, onLogout, token, theme, setTheme }) {
 /* ═══════════════════════════════════════
    SHARED FORM LAYOUT
 ═══════════════════════════════════════ */
-function FormLayout({ title, subtitle, onBack, children }) {
+function FormLayout({ title, subtitle, onBack, children, theme }) {
+  useTheme(theme);
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
       <BgGrid />
@@ -994,7 +1003,8 @@ function FormLayout({ title, subtitle, onBack, children }) {
 }
 
 /* ─── Credit ─── */
-function CreditPage({ onBack, token }) {
+function CreditPage({ onBack, token, theme }) {
+  useTheme(theme);
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
   const [purpose, setPurpose] = useState("");
@@ -1039,7 +1049,8 @@ function CreditPage({ onBack, token }) {
 }
 
 /* ─── Transfer ─── */
-function TransferPage({ onBack, token }) {
+function TransferPage({ onBack, token, theme }) {
+  useTheme(theme);
   const [mode, setMode] = useState("username"); // "username" | "card"
   const [query, setQuery] = useState("");
   const [amount, setAmount] = useState("");
@@ -1196,7 +1207,8 @@ function TransferPage({ onBack, token }) {
 
 /* ─── Deposit ─── */
 /* ─── Support ─── */
-function SupportPage({ onBack, token }) {
+function SupportPage({ onBack, token, theme }) {
+  useTheme(theme);
   const [problem, setProblem] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -1295,7 +1307,8 @@ function SupportPage({ onBack, token }) {
 }
 
 /* ─── Profile ─── */
-function ProfilePage({ onBack, token }) {
+function ProfilePage({ onBack, token, theme }) {
+  useTheme(theme);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState("");
@@ -1417,13 +1430,13 @@ export default function App() {
   return (
     <>
       <GlobalStyle theme={theme} />
-      {screen === "warning"   && <WarningPage   onContinue={() => setScreen("auth")} />}
-      {screen === "auth"      && <AuthPage      onLogin={handleLogin} />}
+      {screen === "warning"   && <WarningPage   onContinue={() => setScreen("auth")} theme={theme} />}
+      {screen === "auth"      && <AuthPage      onLogin={handleLogin} theme={theme} />}
       {screen === "dashboard" && <DashboardPage onNavigate={s => setScreen(s)} onLogout={handleLogout} token={token} theme={theme} setTheme={setTheme} />}
-      {screen === "credit"    && <CreditPage    onBack={() => setScreen("dashboard")} token={token} />}
-      {screen === "transfer"  && <TransferPage  onBack={() => setScreen("dashboard")} token={token} />}
-      {screen === "support"   && <SupportPage   onBack={() => setScreen("dashboard")} token={token} />}
-      {screen === "profile"   && <ProfilePage   onBack={() => setScreen("dashboard")} token={token} />}
+      {screen === "credit"    && <CreditPage    onBack={() => setScreen("dashboard")} token={token} theme={theme} />}
+      {screen === "transfer"  && <TransferPage  onBack={() => setScreen("dashboard")} token={token} theme={theme} />}
+      {screen === "support"   && <SupportPage   onBack={() => setScreen("dashboard")} token={token} theme={theme} />}
+      {screen === "profile"   && <ProfilePage   onBack={() => setScreen("dashboard")} token={token} theme={theme} />}
     </>
   );
 }
