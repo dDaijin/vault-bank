@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const API = process.env.REACT_APP_API_URL || "https://vault-bank-production.up.railway.app/api";
+/* ─── API ─── */
+const API = "http://127.0.0.1:8000/api";
 
 const api = {
   post: async (url, body, token) => {
@@ -57,14 +58,14 @@ const THEMES = {
     gridColor: "#222",
   },
   light: {
-    yellow: "#C49A00",
+    yellow: "#A67C00",
     red: "#D62828",
     black: "#F0EDE6",
-    white: "#1A1A1A",
+    white: "#0A0A0A",
     gray2: "#E2DDD6",
     gray3: "#D0CAC0",
-    gray4: "#B0A898",
-    muted: "#888880",
+    gray4: "#8A8278",
+    muted: "#3A3530",
     gridColor: "#C8C4BC",
   },
 };
@@ -74,8 +75,7 @@ let C = THEMES.dark;
 
 // Оновлює глобальний C — викликається на початку кожного компонента
 const useTheme = (theme) => {
-  if (theme) C = THEMES[theme] || THEMES.dark;
-  return C;
+  C = THEMES[theme] || THEMES.dark;
 };
 
 const FONT = "Oxanium";
