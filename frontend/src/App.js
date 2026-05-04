@@ -63,8 +63,8 @@ const THEMES = {
     white: "#0A0A0A",
     gray2: "#E2DDD6",
     gray3: "#D0CAC0",
-    gray4: "#8A8278",
-    muted: "#3A3530",
+    gray4: "#0A0A0A",
+    muted: "#0A0A0A",
     gridColor: "#C8C4BC",
   },
 };
