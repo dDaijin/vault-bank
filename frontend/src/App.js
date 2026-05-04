@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-/* ─── API ─── */
-const API = "http://127.0.0.1:8000/api";
+const API = process.env.REACT_APP_API_URL || "https://vault-bank-production.up.railway.app/api";
 
 const api = {
   post: async (url, body, token) => {
