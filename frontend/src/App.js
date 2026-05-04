@@ -1,8 +1,7 @@
-// App.js
 import { useState, useEffect } from "react";
 
 /* ─── API ─── */
-const API = process.env.REACT_APP_API_URL || "https://vault-bank-production.up.railway.app/api";
+const API = "http://127.0.0.1:8000/api";
 
 const api = {
   post: async (url, body, token) => {
@@ -615,6 +614,33 @@ function DashboardPage({ onNavigate, onLogout, token, theme, setTheme }) {
   const [copied, setCopied] = useState(false);
   const [selectedTx, setSelectedTx] = useState(null);
 
+  // Курси валют НБУ
+  const [rates, setRates] = useState({ usd: null, eur: null });
+  const [ratesLoading, setRatesLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const today = new Date();
+        const dateStr = today.toISOString().slice(0, 10).replace(/-/g, "");
+        const [usdRes, eurRes] = await Promise.all([
+          fetch(`https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=USD&date=${dateStr}&json`),
+          fetch(`https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=EUR&date=${dateStr}&json`),
+        ]);
+        const [usdData, eurData] = await Promise.all([usdRes.json(), eurRes.json()]);
+        setRates({
+          usd: usdData[0]?.rate ?? null,
+          eur: eurData[0]?.rate ?? null,
+        });
+      } catch (e) {
+        console.log("Помилка завантаження курсів НБУ", e);
+      } finally {
+        setRatesLoading(false);
+      }
+    };
+    fetchRates();
+  }, []);
+
   const copyCard = () => {
     if (!account?.card_number) return;
     navigator.clipboard.writeText(account.card_number).then(() => {
@@ -760,6 +786,41 @@ function DashboardPage({ onNavigate, onLogout, token, theme, setTheme }) {
             {loading ? "**** **** **** ****" : (account?.card_number ? account.card_number.replace(/(.{4})(?=.)/g, "$1 ") : "**** **** **** ****")}
             {copied && <span className="ml-2 text-xs" style={{ color: C.yellow }}>✓ скопійовано</span>}
           </p>
+        </div>
+
+        {/* Блок курсів валют НБУ */}
+        <div className="mb-6 p-4"
+          style={{ background: C.gray2, border: `1px solid ${C.gray4}` }}>
+          <p className="font-mono text-xs tracking-widest uppercase mb-3"
+            style={{ color: C.muted }}>
+            Курс НБУ · {new Date().toLocaleDateString("uk-UA")}
+          </p>
+          {ratesLoading ? (
+            <div className="flex gap-4">
+              <Skeleton w="120px" h={20} />
+              <Skeleton w="120px" h={20} />
+            </div>
+          ) : (
+            <div className="flex gap-4 flex-wrap">
+              {/* USD */}
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs" style={{ color: C.muted }}>USD</span>
+                <span className="font-display text-lg" style={{ color: C.white }}>
+                  {rates.usd ? Number(rates.usd).toFixed(2) : "—"}
+                </span>
+                <span className="font-mono text-xs" style={{ color: C.muted }}>₴</span>
+              </div>
+              <div style={{ width: 1, background: C.gray4 }} />
+              {/* EUR */}
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs" style={{ color: C.muted }}>EUR</span>
+                <span className="font-display text-lg" style={{ color: C.white }}>
+                  {rates.eur ? Number(rates.eur).toFixed(2) : "—"}
+                </span>
+                <span className="font-mono text-xs" style={{ color: C.muted }}>₴</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Блок активного кредиту з таймером */}
