@@ -1,26 +1,34 @@
 import asyncio
 import httpx
 from fastapi import APIRouter
+from datetime import datetime, timezone, timedelta
 
 router = APIRouter()
+
+async def fetch_rate(client: httpx.AsyncClient, valcode: str, date: str):
+    """Отримує курс валюти за датою. Якщо немає — пробує попередній день."""
+    for delta in range(5):  # пробуємо до 5 днів назад
+        d = (datetime.strptime(date, "%Y%m%d") - timedelta(days=delta)).strftime("%Y%m%d")
+        res = await client.get(
+            f"https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange"
+            f"?valcode={valcode}&date={d}&json",
+            timeout=10
+        )
+        data = res.json()
+        if data and len(data) > 0 and data[0].get("rate"):
+            return data[0]["rate"]
+    return None
 
 @router.get("/rates")
 async def get_rates():
     """Отримує курси USD та EUR з НБУ API"""
     try:
-        from datetime import datetime, timezone
         today = datetime.now(timezone.utc).strftime("%Y%m%d")
         async with httpx.AsyncClient() as client:
-            usd_res, eur_res = await asyncio.gather(
-                client.get(f"https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=USD&date={today}&json", timeout=10),
-                client.get(f"https://bank.gov.ua/NBUStatService/v1/statdataportal/exchange?valcode=EUR&date={today}&json", timeout=10),
+            usd, eur = await asyncio.gather(
+                fetch_rate(client, "USD", today),
+                fetch_rate(client, "EUR", today),
             )
-        usd_data = usd_res.json()
-        eur_data = eur_res.json()
-        return {
-            "usd": usd_data[0]["rate"] if usd_data else None,
-            "eur": eur_data[0]["rate"] if eur_data else None,
-            "date": today,
-        }
+        return {"usd": usd, "eur": eur}
     except Exception as e:
         return {"usd": None, "eur": None, "error": str(e)}
