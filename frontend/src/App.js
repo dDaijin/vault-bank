@@ -53,7 +53,7 @@ const THEMES = {
     gray2: "#1A1A1A",
     gray3: "#2A2A2A",
     gray4: "#3D3D3D",
-    muted: "#666666",
+    muted: "#F5F0E8",
     gridColor: "#222",
   },
   light: {
@@ -63,7 +63,7 @@ const THEMES = {
     white: "#0A0A0A",
     gray2: "#E2DDD6",
     gray3: "#D0CAC0",
-    gray4: "#8A8278",
+    gray4: "#0A0A0A",
     muted: "#3A3530",
     gridColor: "#C8C4BC",
   },
