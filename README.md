@@ -105,98 +105,35 @@ flowchart TD
 
 ---
 
-## 🗄 ER Diagram (Схема бази даних)
+## ER Diagram (Схема бази даних)
 
 Нижче представлена структура бази даних системи **Vault Bank**:
 
-```mermaid
-erDiagram
-    User ||--o{ Account : "owns (0..*)"
-    User ||--o{ CreditScore : "has (0..*)"
-    User ||--o{ AuditLog : "generates (0..*)"
-    
-    Account ||--o{ Transaction : "from (0..*)"
-    Account ||--o{ Transaction : "to (0..*)"
-    Account ||--o{ Loan : "has (0..*)"
-
-    User {
-        int UserID PK
-        string Username
-        string Email
-        string PhoneNumber
-        string PasswordHash
-        string UserType
-    }
-
-    CreditScore {
-        int CreditScoreID PK
-        int UserID FK
-        int Score
-        datetime CalculatedAt
-    }
-
-    AuditLog {
-        int AuditID PK
-        int UserID FK
-        string Action
-        string EntityType
-        int EntityID
-        string IpAddress
-        datetime Timestamp
-    }
-
-    Account {
-        int AccountID PK
-        int UserID FK
-        decimal Balance
-        string Currency
-        string AccountType
-        string Status
-    }
-
-    Loan {
-        int LoanID PK
-        int AccountID FK
-        decimal Amount
-        int TermMonths
-        string Status
-        datetime CreatedAt
-    }
-
-    Transaction {
-        int TransactionID PK
-        int FromAccountID FK
-        int ToAccountID FK
-        decimal Amount
-        string Type
-        string Status
-        datetime Timestamp
-        string Description
-    }
+<img width="1024" height="510" alt="image" src="https://github.com/user-attachments/assets/a25c6e3b-369f-40c4-9182-b8ff8945c7bf" />
 
 ```
 
 ---
 
-## 📡 API Ендпоінти
+## API Ендпоінти
 
-### 🔐 Auth & Users
+### Auth & Users
 
 * `POST /api/auth/register` — Реєстрація нового користувача
 * `POST /api/auth/login` — Вхід у систему та отримання токена
 * `GET /api/user/profile` — Отримання профілю поточного користувача
 
-### 💳 Accounts & Balance
+### Accounts & Balance
 
 * `GET /api/accounts/me` — Інформація про баланс та картку користувача
 * `GET /api/nbu-rates` — Отримання актуального курсу валют НБУ
 
-### 💸 Transactions
+### Transactions
 
 * `POST /api/transactions/transfer` — Здійснення переказу коштів (за логіном або номером картки)
 * `GET /api/transactions/history` — Отримання історії останніх операцій
 
-### 📉 Loans
+### Loans
 
 * `POST /api/loans/apply` — Подача заявки на кредит
 * `POST /api/loans/repay` — Погашення активного кредиту (зокрема дострокове)
@@ -204,7 +141,7 @@ erDiagram
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 Проєкт повністю готовий до контейнеризації через Docker Compose.
 
@@ -227,7 +164,7 @@ docker-compose up -d --build
 
 ---
 
-## ⚙️ Покрокова встановлення (Local Setup)
+## Покрокова встановлення (Local Setup)
 
 Якщо ви бажаєте запустити проєкт без Docker:
 
@@ -263,23 +200,32 @@ npm run dev
 
 ---
 
-## 🖼 Скріншоти інтерфейсу
+## Скріншоти інтерфейсу
 
-| 1. Попередження (Освітній дисклеймер) | 2. Форма входу та реєстрації |
-| --- | --- |
-| <img width="682" height="631" alt="image" src="https://github.com/user-attachments/assets/8bd6e77e-7c50-4a60-938e-aeca91d5ece8" /> | <img width="891" height="436" alt="image" src="https://github.com/user-attachments/assets/13d23193-791d-4d5e-95e7-b953f6e203fd" /> |
+--- 1. Попередження (Освітній дисклеймер) 
+<img width="682" height="631" alt="image" src="https://github.com/user-attachments/assets/a00c0834-e61c-4c15-a8d9-c79499d16625" />
 
-| 3. Головна панель користувача (Dashboard) | 4. Активний кредит та історія операцій |
-| --- | --- |
-|  |  |
+--- 2. Форма входу та реєстрації |
+<img width="891" height="436" alt="image" src="https://github.com/user-attachments/assets/b9517771-9782-41af-a44c-5e89be54fe78" />
 
-| 5. Оформлення кредиту | 6. Переказ коштів |
-| --- | --- |
-|  |  |
+
+--- 3. Головна панель користувача (Dashboard)
+<img width="587" height="882" alt="image" src="https://github.com/user-attachments/assets/828cdadd-0a48-4303-b29a-f075db11155a" />
+
+--- 4. Активний кредит та історія операцій |
+<img width="599" height="767" alt="image" src="https://github.com/user-attachments/assets/4059563c-3bd9-4204-992a-cfa334514134" />
+
+
+--- 5. Оформлення кредиту 
+<img width="530" height="623" alt="image" src="https://github.com/user-attachments/assets/877a3d17-24d8-40fe-b302-f22a939cd53f" />
+
+--- 6. Переказ коштів |
+<img width="542" height="700" alt="image" src="https://github.com/user-attachments/assets/c379f477-a42a-44ea-a62b-8503b5f6d142" />
+
 
 ---
 
-## 🚀 Майбутні покращення (Future Improvements)
+## Майбутні покращення (Future Improvements)
 
 * [ ] **2FA підтвердження:** Додавання Google Authenticator / SMS OTP для підтвердження переказів.
 * [ ] **Підтримка декількох валют (USD, EUR):** Конвертація коштів усередині застосунку за курсом НБУ.
