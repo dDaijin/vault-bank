@@ -1,11 +1,6 @@
-Ось відредагована версія вашого README.md.
-
-Я повністю виправив розмітку, прибрав зайві блоки коду, що "зламалися", відформатував скріншоти в зручну сітку (галерею) для кращого вигляду на GitHub, виправив синтаксис `mermaid` та зберег **усі ваші посилання на зображення без змін**:
-
-```markdown
 <div align="center">
 
-# 🏦 VAULT BANK
+# VAULT BANK
 
 **Сучасний вебзастосунок для імітації банківських операцій та управління фінансами**
 
@@ -16,7 +11,7 @@
 
 ---
 
-> ⚠️ **УВАГА: Навчальний проєкт**  
+> **УВАГА: Навчальний проєкт**  
 > Застосунок розроблений виключно в освітніх цілях у рамках лабораторної роботи.  
 > * Не є реальним банківським застосунком  
 > * Не виконує жодних реальних фінансових операцій  
@@ -27,7 +22,7 @@
 
 </div>
 
-## 📌 Про проєкт
+## Про проєкт
 
 **Vault Bank** — це навчальний вебзастосунок з відкритим вихідним кодом, створений для демонстрації принципів побудови банківських систем, обробки грошових переказів, обліку кредитів, логування аудиту та розрахунку кредитного рейтингу користувачів.
 
@@ -35,7 +30,7 @@
 
 ---
 
-## 🛠 Стек технологій
+## Стек технологій
 
 | Шар | Технології |
 | :--- | :--- |
@@ -46,42 +41,42 @@
 
 ---
 
-## ⚡ Можливості
+## Можливості
 
-* **🔐 Авторизація та безпека:**
+* **Авторизація та безпека:**
   * Реєстрація та вхід за логіном/паролем
   * Двофакторне підтвердження та застереження при вході
   * Хешування паролів та безпечна сесійна аутентифікація
-* **💳 Банківські картки та рахунки:**
+* **Банківські картки та рахунки:**
   * Відображення балансу дебетової картки у реальному часі (UAH)
   * Інтеграція та відображення актуального офіційного курсу НБУ
-* **💸 Грошові перекази:**
+* **Грошові перекази:**
   * Переказ коштів за **логіном отримувача** або **номером картки**
   * Додавання опису та призначення платежу
-* **📊 Кредитування:**
+* **Кредитування:**
   * Оформлення заявки на кредит (сума, термін, мета)
   * Відстеження активного кредиту та зворотний відлік до сплати
   * Можливість дострокового погашення
-* **📜 Історія транзакцій та аудит:**
+* **Історія транзакцій та аудит:**
   * Деталізована історія вхідних і вихідних переказів
   * Система логування дій користувача (`AuditLog`)
 
 ---
 
-## 🏗 Архітектура системи
+## Архітектура системи
 
 Застосунок побудований за класичною тришаровою архітектурою (*Client-Server-Database*):
 
 ```mermaid
 flowchart TD
-    Client[📱 Web Client / User UI]
+    Client[Web Client / User UI]
     
     subgraph Server [Backend Application]
-        API[🚀 REST API Controller]
-        AuthService[🔑 Auth & User Service]
-        BankService[💸 Transaction & Account Service]
-        CreditService[📉 Loan & Credit Score Service]
-        AuditService[📝 Audit Log Service]
+        API[REST API Controller]
+        AuthService[Auth & User Service]
+        BankService[Transaction & Account Service]
+        CreditService[Loan & Credit Score Service]
+        AuditService[Audit Log Service]
     end
     
     subgraph Database [PostgreSQL / MySQL]
@@ -98,138 +93,110 @@ flowchart TD
     BankService <--> DB
     CreditService <--> DB
     AuditService <--> DB
-
 ```
 
 ---
 
-## 🗄 ER Diagram (Схема бази даних)
+## ER Diagram (Схема бази даних)
 
 Нижче представлена структура бази даних системи **Vault Bank**:
 
+<div align="center">
+  <img width="1024" alt="ER Diagram" src="https://github.com/user-attachments/assets/a25c6e3b-369f-40c4-9182-b8ff8945c7bf" />
+</div>
+
 ---
 
-## 🔌 API Ендпоінти
+## API Ендпоінти
 
 ### Auth & Users
-
 * `POST /api/auth/register` — Реєстрація нового користувача
 * `POST /api/auth/login` — Вхід у систему та отримання токена
 * `GET /api/user/profile` — Отримання профілю поточного користувача
 
 ### Accounts & Balance
-
 * `GET /api/accounts/me` — Інформація про баланс та картку користувача
 * `GET /api/nbu-rates` — Отримання актуального курсу валют НБУ
 
 ### Transactions
-
 * `POST /api/transactions/transfer` — Здійснення переказу коштів (за логіном або номером картки)
 * `GET /api/transactions/history` — Отримання історії останніх операцій
 
 ### Loans
-
 * `POST /api/loans/apply` — Подача заявки на кредит
 * `POST /api/loans/repay` — Погашення активного кредиту (зокрема дострокове)
 * `GET /api/loans/active` — Перегляд поточного кредитного стану
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 Проєкт повністю готовий до контейнеризації через Docker Compose.
 
 ### Крок 1: Клонування репозиторію
-
 ```bash
-git clone [https://github.com/dDaijin/vault-bank.git](https://github.com/dDaijin/vault-bank.git)
+git clone https://github.com/dDaijin/vault-bank.git
 cd vault-bank
-
 ```
 
 ### Крок 2: Запуск через Docker Compose
-
 ```bash
 docker-compose up -d --build
-
 ```
 
 Після успішного запуску застосунок буде доступний за адресою: `http://localhost:3000` (або `http://localhost:8080`).
 
 ---
 
-## 💻 Покрокове встановлення (Local Setup)
+## Покрокове встановлення (Local Setup)
 
 Якщо ви бажаєте запустити проєкт без Docker:
 
 1. **Клонуйте репозиторій:**
-```bash
-git clone [https://github.com/dDaijin/vault-bank.git](https://github.com/dDaijin/vault-bank.git)
-cd vault-bank
+   ```bash
+   git clone https://github.com/dDaijin/vault-bank.git
+   cd vault-bank
+   ```
 
-```
-
-
-2. **Налаштуйте змінні середовища:**
-Створіть файл `.env` у кореневій директорії на основі `.env.example`:
-```env
-PORT=8080
-DATABASE_URL=postgres://user:password@localhost:5432/vault_bank
-JWT_SECRET=your_secret_key
-
-```
-
+2. **Налаштуйте змінні середовища:**  
+   Створіть файл `.env` у кореневій директорії на основі `.env.example`:
+   ```env
+   PORT=8080
+   DATABASE_URL=postgres://user:password@localhost:5432/vault_bank
+   JWT_SECRET=your_secret_key
+   ```
 
 3. **Встановіть залежності та запустіть:**
-```bash
-# Встановлення залежностей
-npm install   # або pip install -r requirements.txt / dotnet restore
+   ```bash
+   # Встановлення залежностей
+   npm install   # або pip install -r requirements.txt / dotnet restore
 
-# Запуск у режимі розробки
-npm run dev
-
-```
-
-
+   # Запуск у режимі розробки
+   npm run dev
+   ```
 
 ---
 
-## 🖼 Скріншоти інтерфейсу
+## Скріншоти інтерфейсу
 
-| 
+| 1. Попередження (Освітній дисклеймер) | 2. Форма входу та реєстрації |
+| :---: | :---: |
+| <img width="400" alt="Попередження" src="https://github.com/user-attachments/assets/a00c0834-e61c-4c15-a8d9-c79499d16625" /> | <img width="400" alt="Авторизація" src="https://github.com/user-attachments/assets/b9517771-9782-41af-a44c-5e89be54fe78" /> |
 
-<br>1. Попередження (Освітній дисклеймер) | 
+| 3. Головна панель користувача (Dashboard) | 4. Активний кредит та історія операцій |
+| :---: | :---: |
+| <img width="400" alt="Dashboard" src="https://github.com/user-attachments/assets/828cdadd-0a48-4303-b29a-f075db11155a" /> | <img width="400" alt="Історія" src="https://github.com/user-attachments/assets/4059563c-3bd9-4204-992a-cfa334514134" /> |
 
-<br>2. Форма входу та реєстрації |
-| --- | --- |
-|  |  |
-
-| 
-
-<br>3. Головна панель (Dashboard) | 
-
-<br>4. Активний кредит та історія |
-| --- | --- |
-|  |  |
-
-| 
-
-<br>5. Оформлення кредиту | 
-
-<br>6. Переказ коштів |
-| --- | --- |
-|  |  |
+| 5. Оформлення кредиту | 6. Переказ коштів |
+| :---: | :---: |
+| <img width="400" alt="Кредит" src="https://github.com/user-attachments/assets/877a3d17-24d8-40fe-b302-f22a939cd53f" /> | <img width="400" alt="Переказ" src="https://github.com/user-attachments/assets/c379f477-a42a-44ea-a62b-8503b5f6d142" /> |
 
 ---
 
-## 🚀 Майбутні покращення (Future Improvements)
+## Майбутні покращення (Future Improvements)
 
 * [ ] **2FA підтвердження:** Додавання Google Authenticator / SMS OTP для підтвердження переказів.
 * [ ] **Підтримка декількох валют (USD, EUR):** Конвертація коштів усередині застосунку за курсом НБУ.
 * [ ] **Генерація PDF-квитанцій:** Завантаження офіційних виписок та квитанцій про перекази.
 * [ ] **Адмін-панель:** Окремий кабінет для схвалення банківських кредитів та перегляду `AuditLog`.
 * [ ] **Push-сповіщення:** Сповіщення у реальному часі про вхідні та вихідні перекази.
-
-```
-
-```
