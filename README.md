@@ -25,14 +25,17 @@
 
 <div align="center">
 
-| Авторизація / Вхід | Управління картками |
+| Credit| Transaction |
 | :---: | :---: |
-| ![Credit ]<img width="536" height="627" alt="image" src="https://github.com/user-attachments/assets/1f1d593c-fe13-4c36-ae4e-6188cf05b28e" />
- | ![Cards Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Cards+Management) |
+| <img width="536" height="627" alt="image" src="https://github.com/user-attachments/assets/1f1d593c-fe13-4c36-ae4e-6188cf05b28e" />
+ |<img width="528" height="690" alt="image" src="https://github.com/user-attachments/assets/d99ea2b3-4961-408d-808a-049a8fbe5e7d" />
+|
 
-| Історія транзакцій | Перекази коштів |
+| Transaction History | Support |
 | :---: | :---: |
-| ![Transactions Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Transaction+History) | ![Transfers Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Money+Transfer) |
+| <img width="536" height="281" alt="image" src="https://github.com/user-attachments/assets/0cce081c-99f5-4fc8-82dc-1865c363553f" />
+| <img width="547" height="749" alt="image" src="https://github.com/user-attachments/assets/3945b173-da00-4718-bb7d-5d8a274ad681" />
+ |
 
 </div>
 
