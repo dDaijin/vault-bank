@@ -266,7 +266,7 @@ npm run dev
 ## 🖼 Скріншоти інтерфейсу
 
 | 1. Попередження (Освітній дисклеймер) | 2. Форма входу та реєстрації |
-| --- | --- |
+| <img width="682" height="631" alt="image" src="https://github.com/user-attachments/assets/67f89059-9a5b-40fa-9588-7f1912d5d756" /> | <img width="891" height="436" alt="image" src="https://github.com/user-attachments/assets/a80a0432-3ac6-4414-b426-7fd938aced48" /> |
 |  |  |
 
 | 3. Головна панель користувача (Dashboard) | 4. Активний кредит та історія операцій |
