@@ -2,7 +2,7 @@
 
 # VAULT BANK
 
-**Сучасний вебзастосунок для імітації банківських операцій та управління фінансами**
+**A modern web application for simulating banking transactions and managing finances**
 
 [![Project Version](https://img.shields.io/badge/version-v0.1-yellow.svg?style=for-the-badge)](https://github.com/dDaijin/vault-bank)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
@@ -11,12 +11,12 @@
 
 ---
 
-> **УВАГА: Навчальний проєкт**  
-> Застосунок розроблений виключно в освітніх цілях у рамках лабораторної роботи.  
-> * Не є реальним банківським застосунком  
-> * Не виконує жодних реальних фінансових операцій  
-> * Не зберігає і не обробляє реальні фінансові дані  
-> * Не несе жодної юридичної відповідальності  
+> **NOTE: Educational Project**
+> This app was developed solely for educational purposes as part of a lab assignment.
+> * It is not a real banking app
+> * It does not perform any real financial transactions
+> * It does not store or process any real financial data
+> * It assumes no legal liability  
 
 ---
 
@@ -24,15 +24,14 @@
 
 ## Про проєкт
 
-**Vault Bank** — це навчальний вебзастосунок з відкритим вихідним кодом, створений для демонстрації принципів побудови банківських систем, обробки грошових переказів, обліку кредитів, логування аудиту та розрахунку кредитного рейтингу користувачів.
+**Vault Bank** is an open-source educational web application designed to demonstrate the principles of building banking systems, processing money transfers, tracking loans, maintaining audit logs, and calculating users’ credit scores.
 
-Інтерфейс виконано у стильному темному дизайні (*Dark Cyberpunk / Monospaced Aesthetic*) з яскравими жовтими та червоними акцентами.
-
+The interface features a stylish dark design (*Dark Cyberpunk / Monospaced Aesthetic*) with bright yellow and red accents.
 ---
 
-## Стек технологій
+## Technology Stack
 
-| Шар | Технології |
+| Layer | Technologies |
 | :--- | :--- |
 | **Frontend** | HTML5, CSS3, JavaScript (React / Vanilla UI), Tailwind CSS / Custom CSS |
 | **Backend** | Node.js / Python (FastAPI/Flask) / C# (.NET) / Go *(залежно від конфігурації)* |
@@ -41,31 +40,31 @@
 
 ---
 
-## Можливості
+## Features
 
-* **Авторизація та безпека:**
-  * Реєстрація та вхід за логіном/паролем
-  * Двофакторне підтвердження та застереження при вході
-  * Хешування паролів та безпечна сесійна аутентифікація
-* **Банківські картки та рахунки:**
-  * Відображення балансу дебетової картки у реальному часі (UAH)
-  * Інтеграція та відображення актуального офіційного курсу НБУ
-* **Грошові перекази:**
-  * Переказ коштів за **логіном отримувача** або **номером картки**
-  * Додавання опису та призначення платежу
-* **Кредитування:**
-  * Оформлення заявки на кредит (сума, термін, мета)
-  * Відстеження активного кредиту та зворотний відлік до сплати
-  * Можливість дострокового погашення
-* **Історія транзакцій та аудит:**
-  * Деталізована історія вхідних і вихідних переказів
-  * Система логування дій користувача (`AuditLog`)
+* **Authentication and Security:**
+  * Registration and login using username/password
+  * Two-factor authentication and login warnings
+  * Password hashing and secure session authentication
+* **Bank Cards and Accounts:**
+  * Real-time display of debit card balance (UAH)
+  * Integration and display of the current official NBU exchange rate
+* **Money transfers:**
+  * Transfer funds using the **recipient’s username** or **card number**
+  * Add a description and payment purpose
+* **Loans:**
+  * Submit a loan application (amount, term, purpose)
+  * Tracking an active loan and countdown to repayment
+  * Option for early repayment
+* **Transaction history and audit:**
+  * Detailed history of incoming and outgoing transfers
+  * User activity logging system (`AuditLog`)
 
 ---
 
-## Архітектура системи
+## System Architecture
 
-Застосунок побудований за класичною тришаровою архітектурою (*Client-Server-Database*):
+The application is built using a classic three-tier architecture (*Client-Server-Database*):
 
 ```mermaid
 flowchart TD
@@ -97,9 +96,9 @@ flowchart TD
 
 ---
 
-## ER Diagram (Схема бази даних)
+## ER Diagram (Database Diagram)
 
-Нижче представлена структура бази даних системи **Vault Bank**:
+The database structure of the **Vault Bank** system is shown below:
 
 <div align="center">
   <img width="1024" alt="ER Diagram" src="https://github.com/user-attachments/assets/a25c6e3b-369f-40c4-9182-b8ff8945c7bf" />
@@ -107,96 +106,94 @@ flowchart TD
 
 ---
 
-## API Ендпоінти
+## API Endpoints
 
 ### Auth & Users
-* `POST /api/auth/register` — Реєстрація нового користувача
-* `POST /api/auth/login` — Вхід у систему та отримання токена
-* `GET /api/user/profile` — Отримання профілю поточного користувача
+* `POST /api/auth/register` — Register a new user
+* `POST /api/auth/login` — Log in and obtain a token
+* `GET /api/user/profile` — Retrieve the current user's profile
 
 ### Accounts & Balance
-* `GET /api/accounts/me` — Інформація про баланс та картку користувача
-* `GET /api/nbu-rates` — Отримання актуального курсу валют НБУ
+* `GET /api/accounts/me` — User balance and card information
+* `GET /api/nbu-rates` — Retrieve current NBU exchange rates
 
 ### Transactions
-* `POST /api/transactions/transfer` — Здійснення переказу коштів (за логіном або номером картки)
-* `GET /api/transactions/history` — Отримання історії останніх операцій
+* `POST /api/transactions/transfer` — Make a funds transfer (by username or card number)
+* `GET /api/transactions/history` — Retrieve the history of recent transactions
 
 ### Loans
-* `POST /api/loans/apply` — Подача заявки на кредит
-* `POST /api/loans/repay` — Погашення активного кредиту (зокрема дострокове)
-* `GET /api/loans/active` — Перегляд поточного кредитного стану
+* `POST /api/loans/apply` — Submit a loan application
+* `POST /api/loans/repay` — Repay an active loan (including early repayment)
+* `GET /api/loans/active` — View current loan status
 
 ---
 
 ## Docker Deployment
+The project is fully ready for containerization using Docker Compose.
 
-Проєкт повністю готовий до контейнеризації через Docker Compose.
-
-### Крок 1: Клонування репозиторію
+### Step 1: Clone the repository
 ```bash
 git clone https://github.com/dDaijin/vault-bank.git
 cd vault-bank
 ```
 
-### Крок 2: Запуск через Docker Compose
+### Step 2: Run via Docker Compose
 ```bash
 docker-compose up -d --build
 ```
 
-Після успішного запуску застосунок буде доступний за адресою: `http://localhost:3000` (або `http://localhost:8080`).
+Once successfully launched, the application will be available at: `http://localhost:3000` (or `http://localhost:8080`).
 
 ---
 
-## Покрокове встановлення (Local Setup)
+## Step-by-Step Installation (Local Setup)
 
-Якщо ви бажаєте запустити проєкт без Docker:
+If you want to run the project without Docker:
 
-1. **Клонуйте репозиторій:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/dDaijin/vault-bank.git
    cd vault-bank
    ```
 
-2. **Налаштуйте змінні середовища:**  
-   Створіть файл `.env` у кореневій директорії на основі `.env.example`:
+2. **Set up environment variables:**
+   Create a `.env` file in the root directory based on `.env.example`:
    ```env
    PORT=8080
    DATABASE_URL=postgres://user:password@localhost:5432/vault_bank
    JWT_SECRET=your_secret_key
    ```
-
-3. **Встановіть залежності та запустіть:**
+   
+3. **Install dependencies and run the application:**
    ```bash
-   # Встановлення залежностей
-   npm install   # або pip install -r requirements.txt / dotnet restore
+   # Install dependencies
+   npm install   # or pip install -r requirements.txt / dotnet restore
 
-   # Запуск у режимі розробки
+   # Run in development mode
    npm run dev
    ```
 
 ---
 
-## Скріншоти інтерфейсу
+## Interface Screenshots
 
-| 1. Попередження (Освітній дисклеймер) | 2. Форма входу та реєстрації |
+| 1. Warning (Educational Disclaimer) | 2. Login and Registration Form |
 | :---: | :---: |
-| <img width="400" alt="Попередження" src="https://github.com/user-attachments/assets/a00c0834-e61c-4c15-a8d9-c79499d16625" /> | <img width="400" alt="Авторизація" src="https://github.com/user-attachments/assets/b9517771-9782-41af-a44c-5e89be54fe78" /> |
+| <img width="400" alt="Warning" src="https://github.com/user-attachments/assets/a00c0834-e61c-4c15-a8d9-c79499d16625" /> | <img width="400" alt=“Login” src="https://github.com/user-attachments/assets/b9517771-9782-41af-a44c-5e89be54fe78" /> |
 
-| 3. Головна панель користувача (Dashboard) | 4. Активний кредит та історія операцій |
+| 3. User Dashboard | 4. Active Loan and Transaction History |
 | :---: | :---: |
-| <img width="400" alt="Dashboard" src="https://github.com/user-attachments/assets/828cdadd-0a48-4303-b29a-f075db11155a" /> | <img width="400" alt="Історія" src="https://github.com/user-attachments/assets/4059563c-3bd9-4204-992a-cfa334514134" /> |
-
-| 5. Оформлення кредиту | 6. Переказ коштів |
+| <img width="400" alt="Dashboard" src="https://github.com/user-attachments/assets/828cdadd-0a48-4303-b29a-f075db11155a" /> | <img width="400" alt=“History” src="https://github.com/user-attachments/assets/4059563c-3bd9-4204-992a-cfa334514134" /> |
+| 5. Loan Application | 6. Fund Transfer |
 | :---: | :---: |
-| <img width="400" alt="Кредит" src="https://github.com/user-attachments/assets/877a3d17-24d8-40fe-b302-f22a939cd53f" /> | <img width="400" alt="Переказ" src="https://github.com/user-attachments/assets/c379f477-a42a-44ea-a62b-8503b5f6d142" /> |
+| <img width="400" alt="Loan" src="https://github.com/user-attachments/assets/877a3d17-24d8-40fe-b302-f22a939cd53f" /> | <img width="400" alt=“Transfer” src="https://github.com/user-attachments/assets/c379f477-a42a-44ea-a62b-8503b5f6d142" /> |
 
 ---
 
-## Майбутні покращення (Future Improvements)
+## Future Improvements
 
-* [ ] **2FA підтвердження:** Додавання Google Authenticator / SMS OTP для підтвердження переказів.
-* [ ] **Підтримка декількох валют (USD, EUR):** Конвертація коштів усередині застосунку за курсом НБУ.
-* [ ] **Генерація PDF-квитанцій:** Завантаження офіційних виписок та квитанцій про перекази.
-* [ ] **Адмін-панель:** Окремий кабінет для схвалення банківських кредитів та перегляду `AuditLog`.
-* [ ] **Push-сповіщення:** Сповіщення у реальному часі про вхідні та вихідні перекази.
+* [ ] **2FA verification:** Adding Google Authenticator / SMS OTP for transfer verification.
+* [ ] **Multi-currency support (USD, EUR):** In-app currency conversion based on the NBU exchange rate.
+* [ ] **PDF receipt generation:** Download official statements and transfer receipts.
+* [ ] **Admin Panel:** A separate dashboard for approving bank loans and viewing the `AuditLog`.
+* [ ] **Push Notifications:** Real-time notifications for incoming and outgoing transfers.
