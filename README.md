@@ -27,7 +27,8 @@
 
 | Авторизація / Вхід | Управління картками |
 | :---: | :---: |
-| ![Auth Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Login+/+Register) | ![Cards Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Cards+Management) |
+| ![Credit ]<img width="536" height="627" alt="image" src="https://github.com/user-attachments/assets/1f1d593c-fe13-4c36-ae4e-6188cf05b28e" />
+ | ![Cards Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Cards+Management) |
 
 | Історія транзакцій | Перекази коштів |
 | :---: | :---: |
