@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# 🏦 VaultBank — Banking & Financial Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![VaultBank Header Banner](placeholder_banner.png) <!-- ПЛЕЙСХОЛДЕР ДЛЯ БАНЕРА -->
 
-## Available Scripts
+**VaultBank** — це сучасна веб-система для управління банківськими рахунками, фінансовими транзакціями та користувацькими профілями. Проєкт забезпечує високий рівень безпеки, зручний інтерфейс користувача та надійну логіку обробки транзакцій.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## <img width="548" height="877" alt="image" src="https://github.com/user-attachments/assets/0ced8ef0-98c5-4b3d-a89d-521a117aca54" />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<div align="center">
 
-### `npm test`
+### Головна сторінка / Панель управління (Dashboard)
+<!-- Вставте посилання на скріншот панелі управління замість placeholder_dashboard.png -->
+![Dashboard Placeholder](https://via.placeholder.com/800x450/1e293b/ffffff?text=Dashboard+Screenshot+Here)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</div>
 
-### `npm run build`
+<details>
+<summary>🔍 Натисніть, щоб переглянути додаткові скріншоти (Авторизація, Картки, Транзакції)</summary>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<div align="center">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Авторизація / Вхід | Управління картками |
+| :---: | :---: |
+| ![Auth Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Login+/+Register) | ![Cards Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Cards+Management) |
 
-### `npm run eject`
+| Історія транзакцій | Перекази коштів |
+| :---: | :---: |
+| ![Transactions Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Transaction+History) | ![Transfers Placeholder](https://via.placeholder.com/400x250/1e293b/ffffff?text=Money+Transfer) |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+</div>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📐 ER-Діаграма бази даних (Entity-Relationship Diagram)
 
-## Learn More
+Нижче представлена концептуальна ER-діаграма зв'язків між сутностями системи (Users, Accounts, Cards, Transactions, Roles).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```mermaid
+erDiagram
+    USERS ||--o{ ACCOUNTS : "owns"
+    USERS ||--o{ ROLES : "has"
+    ACCOUNTS ||--o{ CARDS : "issues"
+    ACCOUNTS ||--o{ TRANSACTIONS : "sender/receiver"
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    USERS {
+        uuid id PK
+        string email
+        string password_hash
+        string first_name
+        string last_name
+        datetime created_at
+    }
 
-### Code Splitting
+    ACCOUNTS {
+        uuid id PK
+        uuid user_id FK
+        string account_number
+        decimal balance
+        string currency
+        enum status
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    CARDS {
+        uuid id PK
+        uuid account_id FK
+        string card_number
+        string cvv
+        date expiration_date
+        enum card_type
+    }
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    TRANSACTIONS {
+        uuid id PK
+        uuid source_account_id FK
+        uuid destination_account_id FK
+        decimal amount
+        string currency
+        enum status
+        datetime timestamp
+    }
