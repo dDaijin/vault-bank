@@ -1,24 +1,25 @@
 # 🏦 VaultBank — Banking & Financial Management System
 
-![VaultBank Header Banner](placeholder_banner.png) <!-- ПЛЕЙСХОЛДЕР ДЛЯ БАНЕРА -->
+<img width="680" height="625" alt="image" src="https://github.com/user-attachments/assets/c7193620-fce6-4738-97aa-90c955ecc380" />
+<!-- ПЛЕЙСХОЛДЕР ДЛЯ БАНЕРА -->
 
 **VaultBank** — це сучасна веб-система для управління банківськими рахунками, фінансовими транзакціями та користувацькими профілями. Проєкт забезпечує високий рівень безпеки, зручний інтерфейс користувача та надійну логіку обробки транзакцій.
 
 ---
 
-## <img width="548" height="877" alt="image" src="https://github.com/user-attachments/assets/0ced8ef0-98c5-4b3d-a89d-521a117aca54" />
+<img width="875" height="431" alt="image" src="https://github.com/user-attachments/assets/4723586c-8971-4743-a788-fd51bd5de5ce" />
 
 
 <div align="center">
 
 ### Головна сторінка / Панель управління (Dashboard)
-<!-- Вставте посилання на скріншот панелі управління замість placeholder_dashboard.png -->
-![Dashboard Placeholder](https://via.placeholder.com/800x450/1e293b/ffffff?text=Dashboard+Screenshot+Here)
+<img width="537" height="875" alt="image" src="https://github.com/user-attachments/assets/946b3c70-4440-4c89-b4ff-6e942a050d86" />
+
 
 </div>
 
 <details>
-<summary>🔍 Натисніть, щоб переглянути додаткові скріншоти (Авторизація, Картки, Транзакції)</summary>
+<summary>🔍 Натисніть, щоб переглянути додаткові скріншоти</summary>
 
 <br/>
 
