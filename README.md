@@ -144,7 +144,7 @@ flowchart TD
 ## Docker Deployment
 
 Проєкт повністю готовий до контейнеризації через Docker Compose.
-
+```
 ### Крок 1: Клонування репозиторію
 
 ```bash
